@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+venv*/
+.venv/
+.env
+*.zip
+Library/
+Temp/
+Logs/
+obj/
+UserSettings/
