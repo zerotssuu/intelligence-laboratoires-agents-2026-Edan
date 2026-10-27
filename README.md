@@ -37,7 +37,9 @@
 **Code de départ** : https://intelligence.projet.autos/labo-agents/pacman-depart.zip (le Pacman de Berkeley, `pac3man`, corrigé pour Python 3)  
 
 #### Partie 1 : Reverse engineering du code
-📁 **Diagramme UML de l'héritage des agents** : 🔴 LIEN VERS IMAGE GITHUB À REMPLIR
+   📁 **Diagramme UML de l'héritage des agents** :
+
+   ![Héritage des agents](pacman/uml-agents.png)
 
 📑 **La responsabilité de chaque classe :**
 ```
