@@ -20,10 +20,17 @@ class FantomeDuLabo(GhostAgent):
     """Un fantôme de départ : à chaque tour, il choisit une action permise au hasard.
     À vous de le rendre intelligent."""
 
+    COULEUR = (1.0, 0.0, 0.8)
+
     def __init__(self, index):
         super().__init__(index)
-        self.cheminParcouru = []   # étape 2 : les positions visitées par ce fantôme
-
+        self.cheminParcouru = []
+        
+        try:
+            import graphicsDisplay
+            graphicsDisplay.GHOST_COLORS[index] = graphicsDisplay.formatColor(*FantomeDuLabo.COULEUR)
+        except ImportError:
+            pass   
     def getDistribution(self, state):
         """Retourne une note par action permise : le jeu tire l'action au hasard selon ces notes."""
         actionsPermises = state.getLegalActions(self.index)
