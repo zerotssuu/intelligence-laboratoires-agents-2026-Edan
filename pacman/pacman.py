@@ -553,7 +553,11 @@ def readCommand( argv ):
 
     # Choose a ghost agent
     ghostType = loadAgent(options.ghost, noKeyboard)
-    args['ghosts'] = [ghostType( i+1 ) for i in range( options.numGhosts )]
+    ANNULER_FANTOMES = False
+    if ANNULER_FANTOMES:
+        args['ghosts'] = []
+    else:
+        args['ghosts'] = [ghostType( i+1 ) for i in range( options.numGhosts )]
 
     # Choose a display format
     if options.quietGraphics:
