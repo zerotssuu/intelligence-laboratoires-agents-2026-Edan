@@ -32,11 +32,26 @@ class GhostAgent( Agent ):
             print( "Fantôme %d : Pacman s'approche ! (distance %.1f)" % ( self.index, distance ) )
         self.pacmanEtaitProche = proche
 
+        if not hasattr( self, 'chemin' ):
+            self.chemin = []
+        self.chemin.append( state.getGhostPosition( self.index ) )
+
         dist = self.getDistribution(state)
         if len(dist) == 0:
             return Directions.STOP
         else:
             return util.chooseFromDistribution( dist )
+
+    def registerInitialState( self, state ):
+        
+        self.chemin = []
+
+    def final( self, state ):
+       
+        chemin = getattr( self, 'chemin', [] )
+        print( "Fantôme %d : %d déplacements, %d cases différentes visitées"
+               % ( self.index, len(chemin), len(set(chemin)) ) )
+        print( "  Début du chemin : %s" % chemin[:10] )
 
 class RandomGhost( GhostAgent ):
     "A ghost that chooses a legal action uniformly at random."
