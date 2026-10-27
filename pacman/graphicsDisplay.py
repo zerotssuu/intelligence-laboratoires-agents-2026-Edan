@@ -26,7 +26,7 @@ from game import Directions
 DEFAULT_GRID_SIZE = 30.0
 INFO_PANE_HEIGHT = 35
 BACKGROUND_COLOR = formatColor(0,0,0)
-WALL_COLOR = formatColor(0.0/255.0, 51.0/255.0, 255.0/255.0)
+WALL_COLOR = formatColor(0.0/255.0, 180.0/255.0, 80.0/255.0)
 INFO_PANE_COLOR = formatColor(.4,.4,0)
 SCORE_COLOR = formatColor(.9, .9, .9)
 PACMAN_OUTLINE_WIDTH = 2
@@ -65,8 +65,8 @@ PACMAN_SCALE = 0.5
 #pacman_speed = 0.25
 
 # Food
-FOOD_COLOR = formatColor(1,1,1)
-FOOD_SIZE = 0.1
+FOOD_COLOR = formatColor(1.0, 0.6, 0.0)
+FOOD_SIZE = 0.15
 
 # Laser
 LASER_COLOR = formatColor(1,0,0)
