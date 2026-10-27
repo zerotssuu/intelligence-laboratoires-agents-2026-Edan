@@ -43,7 +43,27 @@
 
 📑 **La responsabilité de chaque classe :**
 ```
-🔴 À COMPLÉTER ICI (une ligne par classe)
+Agent (game.py)          : classe de base de tout personnage. Elle impose une seule méthode,
+                           getAction(state), qui reçoit l'état du jeu et retourne une direction
+                           (North, South, East, West ou Stop).
+GhostAgent (ghostAgents.py) : classe de base des fantômes. Son getAction() tire une direction au
+                           hasard selon la distribution de probabilités que chaque sous-classe
+                           définit dans getDistribution() (RandomGhost : uniforme ; DirectionalGhost :
+                           favorise la poursuite ou la fuite).
+KeyboardAgent (keyboardAgents.py) : agent piloté par le joueur. Il lit les touches (WASD ou
+                           flèches), garde la dernière direction si aucune touche n'est pressée et
+                           choisit une direction légale au hasard si la touche demandée est bloquée.
+GameState (pacman.py)    : la photo complète du jeu à un instant donné : nourriture, capsules,
+                           positions et minuteries des agents, score. Les agents l'interrogent
+                           (getLegalActions, getPacmanPosition...) et generateSuccessor() produit
+                           l'état suivant après une action.
+GhostRules (pacman.py)   : les règles qui s'appliquent aux fantômes : mouvements permis (pas
+                           d'arrêt, pas de demi-tour sauf cul-de-sac), vitesse réduite de moitié
+                           quand ils ont peur, décompte de la minuterie de peur, et collisions
+                           avec Pacman (Pacman meurt, ou le fantôme est mangé et retourne au départ).
+Game (game.py)           : le chef d'orchestre. Sa boucle run() demande une action à chaque agent
+                           à tour de rôle, calcule le nouvel état, met à jour l'affichage et
+                           demande aux règles si la partie est gagnée ou perdue.
 ```
 
 📑 **La machine d'état qui existe déjà :**
