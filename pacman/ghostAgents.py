@@ -22,17 +22,21 @@ import util
 class GhostAgent( Agent ):
     def __init__( self, index ):
         self.index = index
+       
+    DISTANCE_ALERTE = 3
 
     def getAction( self, state ):
+        distance = manhattanDistance( state.getGhostPosition( self.index ), state.getPacmanPosition() )
+        proche = distance <= GhostAgent.DISTANCE_ALERTE
+        if proche and not getattr( self, 'pacmanEtaitProche', False ):
+            print( "Fantôme %d : Pacman s'approche ! (distance %.1f)" % ( self.index, distance ) )
+        self.pacmanEtaitProche = proche
+
         dist = self.getDistribution(state)
         if len(dist) == 0:
             return Directions.STOP
         else:
             return util.chooseFromDistribution( dist )
-
-    def getDistribution(self, state):
-        "Returns a Counter encoding a distribution over actions from the provided state."
-        util.raiseNotDefined()
 
 class RandomGhost( GhostAgent ):
     "A ghost that chooses a legal action uniformly at random."
