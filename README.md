@@ -85,8 +85,13 @@ Il existe aussi une petite machine d'états au niveau de la partie : **EN COURS*
 vérifiée par `ClassicGameRules.process()`.
 
 #### Partie 2 : Mini-modifications réalisées
-- [ ] Affichage de la grille légèrement modifié
-- [ ] Création des fantômes annulée
+- [x] Affichage de la grille légèrement modifié : murs verts, nourriture orange et plus grosse (`graphicsDisplay.py`, lignes 29, 68-69)
+
+  ![Grille modifiée](pacman/captures/modif2-sans-fantomes.png)
+
+- [x] Création des fantômes annulée : interrupteur `ANNULER_FANTOMES` dans `readCommand()` (`pacman.py`) ; l'option `-k 0` fait la même chose
+
+  ![Partie sans fantômes](pacman/captures/modif2-sans-fantomes.png)
 - [ ] Fantômes qui tournent toujours à droite
 - [ ] Message en console quand Pacman s'approche
 - [ ] Chemin parcouru par un fantôme mémorisé
