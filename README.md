@@ -94,7 +94,7 @@ vérifiée par `ClassicGameRules.process()`.
 - [ ] Ma propre classe de fantôme, avec sa couleur, instanciée dans le jeu
 
 #### Partie 3 : Ma machine d'état comportementale dans le fantôme
-**Ma librairie de machine d'états importée (celle du labo Machines d'états)** : 🔴 LIEN VERS LE FICHIER À REMPLIR  
+**Ma librairie de machine d'états importée (celle du labo Machines d'états)** : 🔴 [machineEtats.py](pacman/machineEtats.py) 
 📁 **Illustration de la machine d'états ou tableau état-transition** : 🔴 LIEN VERS IMAGE GITHUB À REMPLIR
 
 📑 **Les états de mon fantôme et ce qu'il fait dans chacun :**
