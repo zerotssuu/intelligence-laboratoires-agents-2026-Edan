@@ -67,8 +67,22 @@ Game (game.py)           : le chef d'orchestre. Sa boucle run() demande une acti
 ```
 
 📑 **La machine d'état qui existe déjà :**
-- Les états ? 🔴 À COMPLÉTER
-- Les événements ? 🔴 À COMPLÉTER
+- **Les états ?**
+  - **NORMAL (chasseur)** : `scaredTimer == 0`. Le fantôme va à vitesse 1, il tue Pacman au contact,
+    et DirectionalGhost se rapproche de Pacman (distance minimale, 80 %).
+  - **EFFRAYÉ** : `scaredTimer > 0`. Le fantôme va à vitesse 0,5 (bleu à l'écran), Pacman peut le
+    manger, et DirectionalGhost s'éloigne de Pacman (distance maximale, 80 %).
+- **Les événements ?**
+  - *Pacman mange une capsule* : NORMAL ou EFFRAYÉ → EFFRAYÉ (`scaredTimer = SCARED_TIME = 40`, pour tous les fantômes).
+  - *Le temps passe* (chaque mouvement du fantôme) : EFFRAYÉ → EFFRAYÉ tant que la minuterie dépasse 0,
+    puis EFFRAYÉ → NORMAL quand elle tombe à 0 (`GhostRules.decrementTimer`).
+  - *Pacman touche le fantôme EFFRAYÉ* : EFFRAYÉ → NORMAL ; le fantôme retourne à son point de départ,
+    sa minuterie est remise à 0 et Pacman gagne 200 points (`GhostRules.collide`).
+  - *Pacman touche le fantôme NORMAL* : la partie passe à PERDU (−500 points).
+
+Il existe aussi une petite machine d'états au niveau de la partie : **EN COURS** → **GAGNÉ**
+(toute la nourriture mangée, +500) ou **PERDU** (Pacman touché par un fantôme normal),
+vérifiée par `ClassicGameRules.process()`.
 
 #### Partie 2 : Mini-modifications réalisées
 - [ ] Affichage de la grille légèrement modifié
