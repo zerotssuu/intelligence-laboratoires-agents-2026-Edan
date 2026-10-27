@@ -95,11 +95,20 @@ vérifiée par `ClassicGameRules.process()`.
 
 #### Partie 3 : Ma machine d'état comportementale dans le fantôme
 **Ma librairie de machine d'états importée (celle du labo Machines d'états)** : 🔴 [machineEtats.py](pacman/machineEtats.py) 
-📁 **Illustration de la machine d'états ou tableau état-transition** : 🔴 LIEN VERS IMAGE GITHUB À REMPLIR
+📁 **Illustration de la machine d'états ou tableau état-transition** :
+![Machine d'états du fantôme](pacman/machine-etats-fantome.png)
 
 📑 **Les états de mon fantôme et ce qu'il fait dans chacun :**
 ```
-🔴 À COMPLÉTER ICI (par exemple VUE, SEUL = action au hasard, PROCHE = FUIR...)
+SEUL         : Pacman loin et hors de vue      -> action au hasard
+VUE          : Pacman en ligne de vue          -> le poursuivre (se rapprocher, 80 %)
+PROCHE       : Pacman à 3 cases ou moins       -> ATTAQUER (toujours la direction la plus proche)
+SEUL_PEUR    : effrayé, Pacman hors de vue     -> action au hasard
+VUE_PEUR     : effrayé, Pacman en vue          -> s'éloigner (80 %)
+PROCHE_PEUR  : effrayé, Pacman à 3 cases ou moins -> FUIR (toujours la direction la plus loin)
+
+Interprétation de la consigne « PROCHE = FUIR » : elle s'applique au mode « chasse aux fantômes »
+(PROCHE_PEUR). En mode normal, un fantôme proche attaque, ce qui est plus logique pour un chasseur.
 ```
 
 #### Partie 3 : Parsing (FSM)
