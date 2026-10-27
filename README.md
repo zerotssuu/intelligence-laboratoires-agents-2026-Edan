@@ -18,7 +18,7 @@
 
 #### Partie 1 : Superhéros narcoleptique - Machine d'états avec `transitions`
 **Template** : https://github.com/pytransitions/transitions#quickstart  
-📁 **Mon notebook Colab** : 🔴 LIEN À REMPLIR
+📁 **Mon notebook Colab** : [🔴 LIEN À REMPLIR](https://colab.research.google.com/drive/1BHi6hUYsvmbqSO0sSnVNY6PBpZ8fhZBP?usp=sharing)
 
 #### Partie 2 : Les états FAIM / BIEN / PEUR - Machine d'états comportementale
 **Matrice état-transition** : voir la diapo du cours  
