@@ -79,3 +79,22 @@ class DirectionalGhost( GhostAgent ):
         for a in legalActions: dist[a] += ( 1-bestProb ) / len(legalActions)
         dist.normalize()
         return dist
+
+class FantomeDroite( GhostAgent ):
+    "Mini-modif 3 : un fantôme qui tourne toujours à droite quand il le peut."
+    def getDistribution( self, state ):
+        legal = state.getLegalActions( self.index )
+        direction = state.getGhostState( self.index ).getDirection()
+        dist = util.Counter()
+        if len(legal) == 0:
+            return dist
+
+        # Priorité : droite, puis tout droit, puis gauche
+        for choix in [Directions.RIGHT[direction], direction, Directions.LEFT[direction]]:
+            if choix in legal:
+                dist[choix] = 1.0
+                return dist
+
+        # Départ (direction STOP) ou cul-de-sac : la seule action possible
+        dist[legal[0]] = 1.0
+        return dist
