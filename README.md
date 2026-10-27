@@ -25,9 +25,10 @@
 📁 **Mon notebook Colab (avec la librairie, puis avec ma propre classe)** : [🔴 LIEN À REMPLIR](https://colab.research.google.com/drive/1BHi6hUYsvmbqSO0sSnVNY6PBpZ8fhZBP?usp=sharing)
 
 📑 **Mes réponses aux questions :**
-- Listez les états ? 🔴 À COMPLÉTER
-- Listez les événements ? 🔴 À COMPLÉTER
-- Quel événement pourrait-on ajouter ? 🔴 À COMPLÉTER
+
+- **Listez les états ?** FAIM, BIEN, PEUR
+- **Listez les événements ?** ennemi arrive, ennemi quitte, ami arrive, recevoir nourriture
+- **Quel événement pourrait-on ajouter ?** « temps passe » : avec le temps, la nourriture se digère et l'agent BIEN redevient FAIM ; dans les états FAIM et PEUR, rien ne change. Je l'ai ajouté en bonus à ma propre classe (`ajouter_transition('temps_passe', 'BIEN', 'FAIM')`), ce qui ajoute une colonne à la matrice état-transition.
 
 ---
 
