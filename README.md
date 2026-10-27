@@ -22,7 +22,7 @@
 
 #### Partie 2 : Les états FAIM / BIEN / PEUR - Machine d'états comportementale
 **Matrice état-transition** : voir la diapo du cours  
-📁 **Mon notebook Colab (avec la librairie, puis avec ma propre classe)** : 🔴 LIEN À REMPLIR
+📁 **Mon notebook Colab (avec la librairie, puis avec ma propre classe)** : [🔴 LIEN À REMPLIR](https://colab.research.google.com/drive/1BHi6hUYsvmbqSO0sSnVNY6PBpZ8fhZBP?usp=sharing)
 
 📑 **Mes réponses aux questions :**
 - Listez les états ? 🔴 À COMPLÉTER
