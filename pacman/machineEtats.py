@@ -35,7 +35,7 @@ class MachineEtats:
 
     def afficher_matrice(self):
         evenements = sorted({e for ligne in self.table.values() for e in ligne})
-        print(f"{'':8}" + "".join(f"{e:22}" for e in evenements))
+        print(f"{'':13}" + "".join(f"{e:22}" for e in evenements))
         for etat, ligne in self.table.items():
             cases = "".join(f"{ligne.get(e, '-'):22}" for e in evenements)
-            print(f"{etat:8}{cases}")
+            print(f"{etat:13}{cases}")
