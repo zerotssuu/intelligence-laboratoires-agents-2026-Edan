@@ -112,17 +112,53 @@ Interprétation de la consigne « PROCHE = FUIR » : elle s'applique au mode « 
 ```
 
 #### Partie 3 : Parsing (FSM)
-**Outils** : https://ivanzuzak.info/noam/webapps/fsm_simulator/ , https://madebyevan.com/fsm/ ou https://app.diagrams.net/
+**Outils** : https://ivanzuzak.info/noam/webapps/fsm_simulator/ (FSM Type : DFA)
 
-📁 **Image de la machine d'états `if(a==b)`** : ![Machine d'état de parsing if(a==b)](parsing/machine-etat-parsing-1.png)
-📁 **Image de la machine d'états finale (`if(false)`, `if(0)`)** : 🔴 LIEN VERS IMAGE GITHUB À REMPLIR
+📁 **Image de la machine d'états `if(a==b)`** :
 
-> **Note :** placez vos images dans votre dépôt GitHub  
-> **Option 1 - Lien simple :** `[Voir l'image](chemin/vers/image.png)`  
-> **Option 2 - Afficher l'image :** `![Description](chemin/vers/image.png)`
+Expression régulière : `if\(a==b\)`
+
+![Machine d'état de parsing if(a==b)](parsing/machine-etat-parsing-1.png)
+
+Une ligne droite de 10 états : un état par caractère lu (`i`, `f`, `(`, `a`, `=`, `=`, `b`, `)`),
+l'état acceptant (double cercle) et l'état puits. À chaque état, un seul caractère fait avancer ;
+tous les autres mènent au puits, d'où la machine ne ressort jamais : c'est l'erreur de syntaxe.
+
+📁 **Image de la machine d'états finale (`if(false)`, `if(0)`)** :
+
+Expression régulière : `if\((a==b+false+0)\)`
+(`\(` et `\)` sont de vraies parenthèses à lire ; `( )` regroupent l'alternative ; `+` veut dire OU)
+
+![Machine d'état finale : if(a==b), if(false), if(0)](parsing/machine-etat-parsing-final.png)
+
+14 états, puits compris :
+
+| Partie | États | Rôle |
+|---|---|---|
+| Début commun | 0 → 12 → 11 → 10 | lit `i`, `f`, `(` |
+| Branche `false` | 10 → 9 → 4 → 3 → 2 → 1 | lit `f`, `a`, `l`, `s`, `e` |
+| Branche `a==b` | 10 → 8 → 6 → 5 → 1 | lit `a`, `=`, `=`, `b` |
+| Branche `0` | 10 → 1 | lit `0` |
+| Jonction | 1 | le milieu est lu, la machine attend `)` |
+| Acceptation | 1 → 7 (double cercle) | lit `)` : le mot est reconnu |
+| Puits | 13 | tout caractère inattendu : erreur de syntaxe |
+
+Les trois branches se rejoignent à l'état 1 : le simulateur fusionne les états qui ont le même
+avenir (après `b`, `e` ou `0`, il ne reste qu'à lire `)`). À l'inverse, les deux `f` (avant et
+après `(`) mènent à des états différents, car ils n'ont pas le même avenir.
+
+✅ Acceptés : `if(a==b)`, `if(false)`, `if(0)`
+❌ Refusés : `if(a=b)`, `if()`, `if(a==b`
 
 **📑 Explication à ajouter :**
-- Comment améliorer le programme en tolérant des espaces ? 🔴 À COMPLÉTER
+- **Comment améliorer le programme en tolérant des espaces ?**
+  On ajoute ` *` (un espace suivi de l'étoile : zéro espace ou plus) aux endroits où un espace
+  est permis : après `(`, autour de `==` et avant `)`. Expression : `if\( *(a *== *b+false+0) *\)`.
+  Dans la machine, chacun de ces endroits devient un état qui **boucle sur lui-même** avec le
+  caractère espace : la machine lit autant d'espaces qu'elle veut sans changer d'état. On obtient
+  toujours 14 états, dont 4 bouclent sur eux-mêmes. Les espaces restent interdits à l'intérieur
+  d'un mot (`fal se`) et entre les deux `=`, car `==` est un seul opérateur.
+  ✅ Acceptés en plus : `if( a == b )`, `if( false )`
 
 ---
 
