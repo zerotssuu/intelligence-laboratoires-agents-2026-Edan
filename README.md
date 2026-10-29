@@ -173,7 +173,7 @@ après `(`) mènent à des états différents, car ils n'ont pas le même avenir
 **Formation** : https://learn.unity.com/course/ml-agents-hummingbirds  
 **Scène de départ** : HummingbirdScene_1.0.zip (pas le code source : c'est la solution)
 
-📁 **Mon code GitHub (les fichiers .cs, plusieurs commits par module)** : 🔴 LIEN À REMPLIR  
+📁 **Projet Unity (dépôt public)** : https://github.com/zerotssuu/sorti-du-nid-colibri
 📁 **Le cerveau généré (.onnx ou .nn)** : 🔴 LIEN À REMPLIR  
 📁 **Captures d'écran TensorBoard** : 🔴 LIEN À REMPLIR
 
