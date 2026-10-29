@@ -114,7 +114,7 @@ Interprétation de la consigne « PROCHE = FUIR » : elle s'applique au mode « 
 #### Partie 3 : Parsing (FSM)
 **Outils** : https://ivanzuzak.info/noam/webapps/fsm_simulator/ , https://madebyevan.com/fsm/ ou https://app.diagrams.net/
 
-📁 **Image de la machine d'états `if(a==b)`** : 🔴 LIEN VERS IMAGE GITHUB À REMPLIR  
+📁 **Image de la machine d'états `if(a==b)`** : ![Machine d'état de parsing if(a==b)](parsing/machine-etat-parsing-1.png)
 📁 **Image de la machine d'états finale (`if(false)`, `if(0)`)** : 🔴 LIEN VERS IMAGE GITHUB À REMPLIR
 
 > **Note :** placez vos images dans votre dépôt GitHub  
