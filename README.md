@@ -88,13 +88,13 @@ vérifiée par `ClassicGameRules.process()`.
 - [x] Affichage de la grille légèrement modifié : murs verts, nourriture orange et plus grosse (`graphicsDisplay.py`, lignes 29, 68-69)
 - [x] Création des fantômes annulée : interrupteur `ANNULER_FANTOMES` dans `readCommand()` (`pacman.py`) ; l'option `-k 0` fait la même chose
   ![Partie sans fantômes](pacman/captures/modif2-sans-fantomes.png)
-- [ ] Fantômes qui tournent toujours à droite
-- [ ] Message en console quand Pacman s'approche
-- [ ] Chemin parcouru par un fantôme mémorisé
-- [ ] Ma propre classe de fantôme, avec sa couleur, instanciée dans le jeu
+- [x] Fantômes qui tournent toujours à droite : classe `FantomeDroite` dans `ghostAgents.py`, lancée avec `python3 pacman.py -g FantomeDroite`. Ils suivent les murs comme la règle de la main droite et tournent en rond : 32 cases différentes visitées en 62 déplacements.
+- [x] Message en console quand Pacman s'approche : dans `GhostAgent.getAction()`, donc hérité par tous les fantômes. Le message ne s'affiche qu'à l'entrée dans la zone (3 cases), grâce à une mémoire LOIN/PROCHE.
+- [x] Chemin parcouru par un fantôme mémorisé : liste `self.chemin` dans `GhostAgent`, remise à zéro dans `registerInitialState()` et résumée dans `final()`, deux méthodes appelées automatiquement par `Game.run()`.
+- [x] Ma propre classe de fantôme, avec sa couleur, instanciée dans le jeu : `FantomeDuLabo` (`fantomesAgents.py`), rose fuchsia, lancé avec `python3 pacman.py -g FantomeDuLabo -l smallClassic`. Grâce à l'héritage, il reçoit l'alerte et la mémoire du chemin sans code supplémentaire.
 
 #### Partie 3 : Ma machine d'état comportementale dans le fantôme
-**Ma librairie de machine d'états importée (celle du labo Machines d'états)** : 🔴 [machineEtats.py](pacman/machineEtats.py) 
+**Ma librairie de machine d'états importée (celle du labo Machines d'états)** : [machineEtats.py](pacman/machineEtats.py) 
 📁 **Illustration de la machine d'états ou tableau état-transition** :
 ![Machine d'états du fantôme](pacman/machine-etats-fantome.png)
 
@@ -110,6 +110,29 @@ PROCHE_PEUR  : effrayé, Pacman à 3 cases ou moins -> FUIR (toujours la directi
 Interprétation de la consigne « PROCHE = FUIR » : elle s'applique au mode « chasse aux fantômes »
 (PROCHE_PEUR). En mode normal, un fantôme proche attaque, ce qui est plus logique pour un chasseur.
 ```
+
+📑 **Matrice état-transition** (✓ = l'état ne change pas) :
+
+| État actuel (action) | pacman_hors_vue | pacman_en_vue | pacman_proche | capsule_mangee | peur_finie |
+|---|---|---|---|---|---|
+| **SEUL** (au hasard) | ✓ | VUE | PROCHE | SEUL_PEUR | ✓ |
+| **VUE** (poursuivre) | SEUL | ✓ | PROCHE | VUE_PEUR | ✓ |
+| **PROCHE** (ATTAQUER) | SEUL | VUE | ✓ | PROCHE_PEUR | ✓ |
+| **SEUL_PEUR** (au hasard) | ✓ | VUE_PEUR | PROCHE_PEUR | ✓ | SEUL |
+| **VUE_PEUR** (s'éloigner) | SEUL_PEUR | ✓ | PROCHE_PEUR | ✓ | VUE |
+| **PROCHE_PEUR** (FUIR) | SEUL_PEUR | VUE_PEUR | ✓ | ✓ | PROCHE |
+
+📑 **Résultats** (10 parties contre `GreedyAgent`, `-q -n 10`, plus le score de Pacman est bas, meilleurs sont les fantômes) :
+
+| Fantômes | Score moyen de Pacman | Score médian | Victoires de Pacman |
+|---|---|---|---|
+| FantomeDuLabo (machine d'états) | 29,8 | −192 | 1/10 |
+| RandomGhost | 120,1 | 96 | 1/10 |
+
+📑 **Observations :**
+- `SEUL -> PROCHE` sans passer par VUE : la distance de Manhattan traverse les murs, le fantôme « sent » Pacman derrière un mur. Amélioration possible : distance réelle dans le labyrinthe.
+- `PROCHE_PEUR -> SEUL` en un pas : le fantôme mangé reçoit `peur_finie` puis `pacman_hors_vue` au même tour.
+- Limite : les fantômes ne peuvent pas faire demi-tour (`GhostRules`), un fantôme en fuite avec Pacman derrière lui doit parfois avancer vers lui.
 
 #### Partie 3 : Parsing (FSM)
 **Outils** : https://ivanzuzak.info/noam/webapps/fsm_simulator/ (FSM Type : DFA)
@@ -165,7 +188,7 @@ après `(`) mènent à des états différents, car ils n'ont pas le même avenir
 ## 🟥 SÉRIE ROUGE - L'agent entraîné (4 %, un labo au choix)
 
 **Mon choix :**
-- [ ] 🐦 Sorti du Nid (Hummingbird)
+- [x] 🐦 Sorti du Nid (Hummingbird)
 - [ ] 🏛️ Temples Maya
 - [ ] ⚽ Équipe Soccer (Hugging Face)
 
