@@ -18,11 +18,11 @@
 
 #### Partie 1 : Superhéros narcoleptique - Machine d'états avec `transitions`
 **Template** : https://github.com/pytransitions/transitions#quickstart  
-📁 **Mon notebook Colab** : [🔴 LIEN À REMPLIR](https://colab.research.google.com/drive/1BHi6hUYsvmbqSO0sSnVNY6PBpZ8fhZBP?usp=sharing)
+📁 **Mon notebook Colab** : [Mon notebook Colab](https://colab.research.google.com/drive/1BHi6hUYsvmbqSO0sSnVNY6PBpZ8fhZBP?usp=sharing)
 
 #### Partie 2 : Les états FAIM / BIEN / PEUR - Machine d'états comportementale
 **Matrice état-transition** : voir la diapo du cours  
-📁 **Mon notebook Colab (avec la librairie, puis avec ma propre classe)** : [🔴 LIEN À REMPLIR](https://colab.research.google.com/drive/1BHi6hUYsvmbqSO0sSnVNY6PBpZ8fhZBP?usp=sharing)
+📁 **Mon notebook Colab (avec la librairie, puis avec ma propre classe)** : [Mon notebook Colab](https://colab.research.google.com/drive/1BHi6hUYsvmbqSO0sSnVNY6PBpZ8fhZBP?usp=sharing)
 
 📑 **Mes réponses aux questions :**
 
@@ -194,25 +194,43 @@ après `(`) mènent à des états différents, car ils n'ont pas le même avenir
 
 ### 🐦 Sorti du Nid
 **Formation** : https://learn.unity.com/course/ml-agents-hummingbirds  
-**Scène de départ** : HummingbirdScene_1.0.zip (pas le code source : c'est la solution)
+**Scène de départ** : HummingbirdScene_1.0.zip (pas le code source : c'est la solution)  
+**Environnement** : Unity 6.3 LTS (6000.3.27f1, URP), paquet ML-Agents 4.0.3, Python 3.10.12 + mlagents 1.1.0 + torch 2.2.2 (CPU), Ubuntu 24.04
 
-📁 **Projet Unity (dépôt public)** : https://github.com/zerotssuu/sorti-du-nid-colibri
-📁 **Le cerveau généré (.onnx ou .nn)** : 🔴 LIEN À REMPLIR  
-📁 **Captures d'écran TensorBoard** : 🔴 LIEN À REMPLIR
+📁 **Projet Unity (dépôt public)** : https://github.com/zerotssuu/sorti-du-nid-colibri  
+📁 **Les scripts** : [Flower.cs](https://github.com/zerotssuu/sorti-du-nid-colibri/blob/main/Assets/Hummingbird/Scripts/Flower.cs) (4 commits) · [FlowerArea.cs](https://github.com/zerotssuu/sorti-du-nid-colibri/blob/main/Assets/Hummingbird/Scripts/FlowerArea.cs) (4 commits) · [HummingbirdAgent.cs](https://github.com/zerotssuu/sorti-du-nid-colibri/blob/main/Assets/Hummingbird/Scripts/HummingbirdAgent.cs) (5 commits)  
+📁 **Configuration** : [config/Hummingbird.yaml](https://github.com/zerotssuu/sorti-du-nid-colibri/blob/main/config/Hummingbird.yaml)  
+📁 **Le cerveau généré (.onnx)** : [Hummingbird.onnx](https://github.com/zerotssuu/sorti-du-nid-colibri/blob/main/Assets/Hummingbird/Cerveaux/Hummingbird.onnx)  
+📁 **Captures d'écran TensorBoard** (Environment / Cumulative Reward) :
+
+| Début | Milieu | Fin |
+|---|---|---|
+| ![Début](sorti-du-nid/1-debut.png) | ![Milieu](sorti-du-nid/2-milieu.png) | ![Fin](sorti-du-nid/3-fin.png) |
+
+📑 **L'entraînement** : PPO, 8 îles, `--time-scale=20`, 2,03 M de pas en 4,3 h (portable 4 cœurs, sans carte graphique dédiée), en deux sessions (`--resume` à 814 144 pas).
+- 0 à 700 000 pas : récompense ≈ 0. L'oiseau explore et apprend d'abord à ne plus cogner la limite de l'île (−0,5).
+- 700 000 à 1,5 M : montée. Il découvre le nectar (+0,01 par pas de physique, + jusqu'à 0,02 de bonus de face) ; récompense moyenne de 2 à 1 M, 17 à 1,5 M.
+- 1,5 M à 2 M : plateau vers 25 à 30 (moyenne lissée 25,5 au dernier point).
+
+📑 **Dépannage rencontré** :
+- Le modèle de projet Universal 3D de Unity 6.3 ajoutait le paquet In App Purchasing 4.15, qui ne compilait pas (Safe Mode) : paquet retiré de `Packages/manifest.json`.
+- Paquet ML-Agents : version 4.0.3 choisie plutôt que la 4.1.0 « Recommended », pour rester assortie à mlagents 1.1.0 (Release 23) côté Python.
+- En inférence sous Linux (OpenGL), avec **Inference Device = Default**, l'oiseau tombait au sol : le réseau calculé sur la carte graphique donnait des actions aberrantes. Avec **Inference Device = Burst** (processeur), il vole parfaitement.
+- En inférence, une seule île est active : avec 8 oiseaux sur le même cerveau, ML-Agents 4.0.3 n'envoie des actions qu'à un seul (piège mesuré du guide).
 
 ### 🏛️ Temples Maya
 **Cours** : https://github.com/simoninithomas/unity_ml_agents_course
 
-📁 **Cube sauteur de mur : fichier yaml + répertoire results** : 🔴 LIEN À REMPLIR  
-📁 **Pyramides (Curious Agent) : fichier yaml + répertoire results** : 🔴 LIEN À REMPLIR  
-📁 **Aventure Maya : fichier yaml + répertoire results** : 🔴 LIEN À REMPLIR
+📁 **Cube sauteur de mur : fichier yaml + répertoire results** : *Non choisi (Sorti du Nid réalisé)*  
+📁 **Pyramides (Curious Agent) : fichier yaml + répertoire results** : *Non choisi (Sorti du Nid réalisé)*  
+📁 **Aventure Maya : fichier yaml + répertoire results** : *Non choisi (Sorti du Nid réalisé)*
 
 ### ⚽ Équipe Soccer
 **Cours** : https://huggingface.co/learn/deep-rl-course/unit5/introduction
 
-**Mon compte Hugging Face** : 🔴 LIEN À REMPLIR  
-📁 **Snowball Target : mon modèle publié sur le Hub** : 🔴 LIEN À REMPLIR  
-📁 **Pyramides : mon modèle publié sur le Hub** : 🔴 LIEN À REMPLIR
+**Mon compte Hugging Face** : *Non choisi (Sorti du Nid réalisé)*  
+📁 **Snowball Target : mon modèle publié sur le Hub** : *Non choisi (Sorti du Nid réalisé)*  
+📁 **Pyramides : mon modèle publié sur le Hub** : *Non choisi (Sorti du Nid réalisé)*
 
 > **Remise (pour tous les ateliers ML-Agents)** : voir le guide Expérience ML-Agent lié dans l'énoncé.
 
@@ -260,4 +278,4 @@ après `(`) mènent à des états différents, car ils n'ont pas le même avenir
 
 ---
 
-*Mise à jour : [Date] par [Nom]*
+*Mise à jour : 29 octobre 2026 par Edan*
